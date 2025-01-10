@@ -1,17 +1,25 @@
-import subprocess
+from subprocess import run
 import os 
-import json
+from json import loads
 import tkinter as tk
+from pandas import DataFrame
+
+trackProp = {
+    "trackName": "",
+    "trackType": "",
+    "trackID": None,
+    "trackLang": ""
+}
 
 def bashCall(file: str): #runs the bash script
     
     pass
 
 def mkvCheck(file: str): #will be used for checking which case of the mkv file is used
-    output = subprocess.run(args = ["mkvmerge","-J", file], capture_output = True, check = True)
+    output = run(args = ["mkvmerge","-J", file], capture_output = True, check = True)
     if output.returncode == 0: #Returns 0 if command was successful
-        mkv = json.loads(output.stdout)
-        testDF = pd.DataFrame(mkv["tracks"])
+        mkv = loads(output.stdout)
+        testDF = DataFrame(mkv["tracks"])
         print(testDF)
         hold = False
         for track in mkv["tracks"]:
@@ -47,8 +55,6 @@ def mkvDir(dir: str):
         mkvCheck(os.path.join(dir,file))
     print(mkvFiles)
 
-
-
 def fileCheck(input: str): #check if file or dir exists
     if os.path.isfile(input):
         print("PASSING. IS A FILE")
@@ -60,13 +66,16 @@ def fileCheck(input: str): #check if file or dir exists
         print("ERR: File does not exist")
     return
 
+def audioLabel():
+    
+    pass
+
 if __name__ == "__main__":
     ## NOTE:  This will be replaced by file selector ###
     dirIn = "/home/duck/Desktop/mkvProgramTest/Input"
     fileIn = "[SubsPlease] Dragon Ball Daima - 10 (1080p) [9D357C09].mkv"
     fileLoc = os.path.join(dirIn, fileIn)
     ##########
-    tk
 
     fileCheck(fileLoc)
     mkvDir(dirIn)
