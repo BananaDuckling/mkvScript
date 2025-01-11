@@ -4,6 +4,16 @@ from json import loads
 import tkinter as tk
 from pandas import DataFrame
 
+###This object is not needed, just going to use variables
+'''
+class Track:
+    def __init__(self, name:str, category:str, id:int, lang:str):
+        self.name = name
+        self.category = category
+        self.id = id
+        self.lang = lang
+'''
+
 trackProp = {
     "trackName": "",
     "trackType": "",
@@ -32,6 +42,8 @@ def mkvCheck(file: str): #will be used for checking which case of the mkv file i
             trackType = track["type"]
             trackID = track["id"]
             trackLang = track["properties"]["language"]
+            #track1 = Track(name = trackName, category = trackType, id = trackID, lang = trackLang)
+            print("The name of the track is" + track1.name)
             
             ### Testing output (void when finalized)
             print(trackType)
@@ -45,7 +57,8 @@ def mkvCheck(file: str): #will be used for checking which case of the mkv file i
                 trackLanguage = "Undefined"
             else:
                 trackLang = "Japanese"
-        
+            command = ["mkvpropedit", file, "-e", f"track:={str(trackID+1)}", "-s", f"name=\"{trackName}\""]
+            tempOut = run(args = command, check = True)
     else:
         print("ERROR: json file could not be created. Ensure file is correct mkv format.")
 
@@ -66,8 +79,9 @@ def fileCheck(input: str): #check if file or dir exists
         print("ERR: File does not exist")
     return
 
-def audioLabel():
-    
+def audioModify(trackName: str, trackID: int):
+    pass
+def subtitleModify(trackName: str, trackID: int):
     pass
 
 if __name__ == "__main__":
@@ -78,5 +92,5 @@ if __name__ == "__main__":
     ##########
 
     fileCheck(fileLoc)
-    mkvDir(dirIn)
+    #mkvDir(dirIn)
 
