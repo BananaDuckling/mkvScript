@@ -20,7 +20,7 @@ def fileParser(dir):
                 num = int(test[1])
                 newName = os.path.join(dir, f"{test[0]} Vol. {num}.{fileExt[-1]}")
                 if i == 0:
-                    foo = messagebox.askyesno("ATTENTION", f"The folder will be formatted as follows: \n\n{test[0]} Vol. {num}.{fileExt[-1]}\n\nDo you wish to proceed?")
+                    foo = messagebox.askyesno("ATTENTION", f"The file will be formatted as follows: \n\n{test[0]} Vol. {num}.{fileExt[-1]}\n\nDo you wish to proceed?")
                     if foo == False:
                         return "Aborted"
                 os.rename(os.path.join(dir, file), newName)
