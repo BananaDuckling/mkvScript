@@ -1,0 +1,9 @@
+Changes 1/15:
+* For audioChanger
+    * Now returns a class edit opposed to a command script
+    * Added "enable" to the class "Track"
+    * No longer variables, track arguments are put into the class
+
+Changes 1/27
+*Creating a priority list for audio, video, and subtitles
+    * Added cmd function to the "Track" class
