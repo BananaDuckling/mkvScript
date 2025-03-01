@@ -1,8 +1,5 @@
 from subprocess import run
 import os 
-from json import loads
-import tkinter as tk
-import pandas as pd
 
 
 ###Stores the track properties as a data frame

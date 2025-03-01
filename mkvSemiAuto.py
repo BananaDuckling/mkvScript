@@ -68,7 +68,7 @@ def fileCheck(input: str): #check if file or dir exists
         mkvCheck(input)
     elif os.path.isdir(input):
         print('PASSING. IS A DIRECTORY')
-        mkvCheck(input,)
+        mkvCheck(input)
     else:
         print('ERR: File does not exist')
     return 'dir'
