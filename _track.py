@@ -17,7 +17,11 @@ class Track:
         self.forced = int(forced)
         self.enabled = int(enabled)
         
-    def cmd(self): #Prints the mkvpropedit executable command
+    def cmd(self, skip_file_name: bool = False): #Prints the mkvpropedit executable command
+        if skip_file_name == True:
+            start = 1
+        else:
+            start = 0
         if self.fileFlag == True: #Checks if the command should include the file name
             if os.path.isfile(self.fileName) == False:
                 raise Exception (f'ERROR. File name : "{self.fileName}" could not be found.')
@@ -29,7 +33,7 @@ class Track:
         for i, (attr, val) in enumerate(self.__dict__.items()): #Converts properties into an executable string
             if (i > 6):
                 _cmd += f" -s flag-{attr}={val}" 
-            elif (i > 5):
+            elif (i = 6):
                 _cmd += f" -s {attr}={val}"          
         return _cmd
     

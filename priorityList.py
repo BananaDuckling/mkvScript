@@ -31,6 +31,7 @@ def priorityCheck(codec:str, category:str):
             priority = 7
     else
         raise Exception(f'{category} is not an acceptable track type. Make sure category is of audio, subtitles, or video.')
+    return priority
 
 if __name__ == "__main__":
     from _track import Track

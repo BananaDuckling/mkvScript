@@ -20,6 +20,7 @@ def mkvCheck(file: str): #will be used for checking which case of the mkv file i
         print(df['properties'][0])
         hold = False
         command = f'mkvpropedit {file} '
+        index = 0
         for track in mkv['tracks']:
             ### Key track properties
             try:
@@ -50,9 +51,13 @@ def mkvCheck(file: str): #will be used for checking which case of the mkv file i
                 trackLang = 'Japanese'
             #command = ['mkvpropedit', file, ' -e', f'track:={str(trackID+1)}', '-s', f'name=\"{trackName}\"']
             #tempOut = run(args = command, check = True)
-            test = trackStruc.cmd()
-            print(test)
+            if index == 0:
+                cmdPrompt = trackStruc.cmd(skip_file_name = False)
+            else:
+                cmdPrompt += trackStruc.cmd(skip_file_name = True)
+            index += 1
         #run(args=command)
+        print(cmdPrompt)
     else:
         print('ERROR: json file could not be created. Ensure file is correct mkv format.')
 
@@ -70,7 +75,7 @@ def fileCheck(input: str): #check if file or dir exists
         print('PASSING. IS A DIRECTORY')
         mkvCheck(input)
     else:
-        print('ERR: File does not exist')
+        raise Exception(f'ERROR: {input} IS NOT A VALID FILE NAME.')
     return 'dir'
 
 def audioModify(trackLang: str, trackID: int, command: str):
